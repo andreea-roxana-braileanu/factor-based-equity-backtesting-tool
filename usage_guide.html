@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Investment Simulator — Usage Guide</title>
+<style>
+  body {
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: #f7f6f3;
+    color: #2c2c2a;
+    max-width: 720px;
+    margin: 40px auto;
+    padding: 0 20px;
+    line-height: 1.6;
+  }
+  h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+  .subtitle { color: #5f5e5a; font-size: 15px; margin-bottom: 28px; }
+  .intro-box {
+    background: #ffffff;
+    border: 1px solid #e2e0d8;
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 28px;
+    font-size: 15px;
+  }
+  h2 { font-size: 18px; font-weight: 600; margin-top: 32px; margin-bottom: 14px; }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .step {
+    background: #ffffff;
+    border: 1px solid #e2e0d8;
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+  }
+  .step .num {
+    display: inline-block;
+    width: 26px; height: 26px;
+    background: #185fa5;
+    color: white;
+    border-radius: 50%;
+    font-size: 13px;
+    line-height: 26px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .step .title { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+  .step .desc { font-size: 13px; color: #5f5e5a; }
+  .tickers { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .chip {
+    font-size: 13px;
+    padding: 5px 12px;
+    border-radius: 8px;
+    background: #e6f1fb;
+    color: #0c447c;
+  }
+  .chip.finance { background: #eaf3de; color: #27500a; }
+  .chip.consumer { background: #faeeda; color: #633806; }
+  .chip.energy { background: #fcebeb; color: #791f1f; }
+  .chip.other { background: #f1efe8; color: #444441; }
+  .chip.market { background: #ffffff; border: 1.5px solid #888780; color: #2c2c2a; font-weight: 600; }
+  .note {
+    margin-top: 28px;
+    font-size: 13px;
+    color: #5f5e5a;
+    border-top: 1px solid #e2e0d8;
+    padding-top: 14px;
+  }
+</style>
+</head>
+<body>
+
+  <h1>Investment Simulator</h1>
+  <p class="subtitle">A quick guide for anyone using this project</p>
+
+  <div class="intro-box">
+    This tool answers one question: <strong>if you had invested money in a stock in the past, what would it be worth today?</strong>
+    It pulls real historical stock prices and compares your pick against just owning the overall market (the S&amp;P 500),
+    so you can see whether picking that stock was actually a good move.
+  </div>
+
+  <h2>How to run it</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="num">1</div>
+      <div class="title">Run the file</div>
+      <div class="desc">In PyCharm, right-click <code>interactive_simulator.py</code> and choose Run</div>
+    </div>
+    <div class="step">
+      <div class="num">2</div>
+      <div class="title">Answer 3 questions</div>
+      <div class="desc">Type in a stock ticker, an amount of money, and how many years back</div>
+    </div>
+    <div class="step">
+      <div class="num">3</div>
+      <div class="title">See the result</div>
+      <div class="desc">A chart is saved to your project folder, and the numbers print in the console</div>
+    </div>
+  </div>
+
+  <h2>Stock tickers you can try</h2>
+  <p style="font-size: 13px; color: #5f5e5a; margin-top: -6px;">
+    This isn't a limit — you can type in almost any real public company's ticker. These are just good starting points.
+  </p>
+  <div class="tickers">
+    <span class="chip">AAPL — Apple</span>
+    <span class="chip">MSFT — Microsoft</span>
+    <span class="chip">GOOGL — Google</span>
+    <span class="chip">AMZN — Amazon</span>
+    <span class="chip">META — Meta</span>
+    <span class="chip">NVDA — Nvidia</span>
+    <span class="chip">TSLA — Tesla</span>
+    <span class="chip">NFLX — Netflix</span>
+    <span class="chip">INTC — Intel</span>
+    <span class="chip finance">JPM — JPMorgan</span>
+    <span class="chip finance">V — Visa</span>
+    <span class="chip consumer">KO — Coca-Cola</span>
+    <span class="chip consumer">PEP — Pepsi</span>
+    <span class="chip consumer">WMT — Walmart</span>
+    <span class="chip consumer">HD — Home Depot</span>
+    <span class="chip energy">XOM — Exxon</span>
+    <span class="chip energy">CVX — Chevron</span>
+    <span class="chip other">JNJ — Johnson &amp; Johnson</span>
+    <span class="chip other">DIS — Disney</span>
+    <span class="chip market">SPY — the whole market (benchmark)</span>
+  </div>
+
+  <div class="note">
+    Part of the Factor-Based Equity Screening &amp; Backtesting Tool project. See README.md for full project details.
+  </div>
+
+</body>
+</html>
