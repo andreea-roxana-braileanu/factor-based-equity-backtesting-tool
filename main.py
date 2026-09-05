@@ -33,15 +33,22 @@ def run_factor_strategy():
     print("--- STEP 2: Saving prices to SQL database ---")
     db.save_prices(price_history)
 
+    # Read a sample back out of the database to confirm the round trip works --
+    # this proves the SQL storage is actually being read, not just written to.
+    sample_ticker = settings.TICKERS[0]
+    loaded_sample = db.load_prices(sample_ticker)
+    print(f"  Verified: loaded {len(loaded_sample)} rows for {sample_ticker} back from the database.")
+
     print("--- STEP 3: Scoring stocks using factor:", settings.FACTOR, "---")
     stock_prices = price_history[settings.TICKERS]
 
-    if settings.FACTOR in ("value", "both"):
-        fundamentals = data_fetch.get_fundamentals(settings.TICKERS)
-        value_score = factors.value_scores(fundamentals)
-
-    if settings.FACTOR in ("momentum", "both"):
-        momentum_score = factors.momentum_scores(stock_prices)
+    # Fetch fundamentals and compute BOTH factor scores every time, regardless
+    # of which one settings.FACTOR actually uses to pick stocks. This is what
+    # lets us build and save a full scoreboard showing every stock's numbers,
+    # not just the ones relevant to the chosen factor.
+    fundamentals = data_fetch.get_fundamentals(settings.TICKERS)
+    value_score = factors.value_scores(fundamentals)
+    momentum_score = factors.momentum_scores(stock_prices)
 
     if settings.FACTOR == "value":
         final_scores = value_score
@@ -52,6 +59,12 @@ def run_factor_strategy():
 
     picked = factors.pick_top_stocks(final_scores, settings.NUM_STOCKS)
     print("Picked stocks:", picked)
+
+    scoreboard = factors.build_scoreboard(
+        fundamentals, stock_prices, value_score, momentum_score, final_scores, picked
+    )
+    scoreboard.to_csv("stock_rankings.csv")
+    print("Saved table: stock_rankings.csv")
 
     print("--- STEP 4: Backtesting picked stocks vs benchmark ---")
     portfolio_value = backtest.portfolio_growth(stock_prices, picked)

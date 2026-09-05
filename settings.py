@@ -34,7 +34,7 @@ TICKERS = [
 
 # --- Which factor (rule) to rank stocks by ---
 # Options: "value", "momentum", "both"
-FACTOR = "both"
+FACTOR = "momentum"
 
 # --- How many stocks to pick for the strategy portfolio ---
 NUM_STOCKS = 10
